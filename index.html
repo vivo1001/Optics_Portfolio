@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SV7QVPWT13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SV7QVPWT13');
+</script>
+
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Vivek Harikumar — Laser &amp; Photonics</title>
@@ -181,7 +192,14 @@
   .hero-inner{position:relative; z-index:2; width:100%}
   .eyebrow{font-family:var(--font-mono); font-size:13px; letter-spacing:.16em; color:var(--w532); margin-bottom:22px; display:flex; align-items:center; gap:12px}
   .eyebrow::before{content:"";width:34px;height:1px;background:var(--w532)}
-  .hero h1{font-size:clamp(2.6rem, 7vw, 5.2rem); letter-spacing:-.01em; margin-bottom:18px}
+  .greeting{font-size:clamp(1rem,2.2vw,1.25rem);font-weight:500;color:var(--text);margin-bottom:12px}
+  /* headline lit by a laser spot that follows the cursor (--lx/--ly set in JS;
+     without JS or on touch it rests as a soft centered glow) */
+  .hero h1{
+    font-size:clamp(2.6rem, 7vw, 5.2rem); letter-spacing:-.01em; margin-bottom:18px;
+    background:radial-gradient(200px circle at var(--lx,50%) var(--ly,55%), #fff, var(--w532) 30%, var(--w488) 55%, var(--text) 82%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
   .spectral{background:linear-gradient(90deg,var(--w405),var(--w488),var(--w532),var(--w633)); -webkit-background-clip:text; background-clip:text; color:transparent}
   .lede{max-width:560px; font-size:clamp(1rem,2.2vw,1.2rem); color:var(--muted); margin-bottom:34px}
   .hero-actions{display:flex; gap:14px; flex-wrap:wrap}
@@ -266,6 +284,7 @@
   body.loaded .hero-inner > *:nth-child(2){transition-delay:.15s}
   body.loaded .hero-inner > *:nth-child(3){transition-delay:.27s}
   body.loaded .hero-inner > *:nth-child(4){transition-delay:.39s}
+  body.loaded .hero-inner > *:nth-child(5){transition-delay:.51s}
 
   .fx .sec-head,
   .fx .about-grid > *,
@@ -315,6 +334,7 @@
     .fx .ach > .item,
     .fx .contact > .wrap > *{opacity:1 !important; transform:none !important}
   }
+</style>
 <noscript><style>#loader{display:none}</style></noscript>
 </head>
 <body class="lang-en">
@@ -355,8 +375,8 @@
           <button id="langEn" type="button" class="active">EN</button>
           <button id="langDe" type="button">DE</button>
         </div>
-        <!-- TODO: point this at your compiled CV PDF -->
-        <a class="cv-btn" href="https://drive.google.com/file/d/1ezBSAc92xOM01AX_lLYaOKe3p5p5UccI/view?usp=sharing.pdf" download>
+        <!-- TODO: replace with a PDF hosted alongside the site (e.g. /cv.pdf) and re-add the download attribute -->
+        <a class="cv-btn" href="https://drive.google.com/file/d/1ezBSAc92xOM01AX_lLYaOKe3p5p5UccI/view?usp=sharing" target="_blank" rel="noopener">
           ↓ <span class="l-en">Download CV</span><span class="l-de">Lebenslauf</span>
         </a>
       </div>
@@ -377,13 +397,17 @@
         <span class="l-en">PHOTONICS · OPTICAL SYSTEMS · SIMULATION</span>
         <span class="l-de">PHOTONIK · OPTISCHE SYSTEME · SIMULATION</span>
       </div>
+      <p class="greeting">
+        <span class="l-en">Welcome —</span>
+        <span class="l-de">Willkommen —</span>
+      </p>
       <h1>
-        <span class="l-en">Bending light into <span class="spectral">working systems</span>.</span>
-        <span class="l-de">Aus Licht <span class="spectral">funktionierende Systeme</span> entwickeln.</span>
+        <span class="l-en">I'm Vivek Harikumar.</span>
+        <span class="l-de">Ich bin Vivek Harikumar.</span>
       </h1>
       <p class="lede">
-        <span class="l-en">M.Sc. student in Laser and Photonics at Ruhr University Bochum, with hands-on experience in laser applications, optical experiments, optical simulation, and the characterization of photonic materials — backed by Python, MATLAB, and FEMWELL.</span>
-        <span class="l-de">M.Sc.-Student der Laser and Photonics an der Ruhr-Universität Bochum mit Erfahrung in Laseranwendungen, optischen Experimenten, optischer Simulation und der Charakterisierung photonischer Materialien — mit Kenntnissen in Python, MATLAB und FEMWELL.</span>
+        <span class="l-en">I'm an M.Sc. student in Laser and Photonics at Ruhr University Bochum. Right now I simulate GRIN micro-optics at Eyonex Glass in Berlin and build organic solar cells in RUB's laser lab — and at night I point cameras at the sky.</span>
+        <span class="l-de">Ich bin M.Sc.-Student der Laser and Photonics an der Ruhr-Universität Bochum. Aktuell simuliere ich GRIN-Mikrooptiken bei Eyonex Glass in Berlin und baue organische Solarzellen im Laserlabor der RUB — und nachts richte ich Kameras auf den Sternenhimmel.</span>
       </p>
       <div class="hero-actions">
         <a class="btn-solid" href="#projects"><span class="l-en">View projects</span><span class="l-de">Projekte ansehen</span></a>
@@ -397,21 +421,24 @@
     <div class="wrap">
       <div class="sec-head">
         <span class="sec-tag"><span class="l-en">// 01 — about</span><span class="l-de">// 01 — über mich</span></span>
-        <h2><span class="l-en">Light is the instrument.</span><span class="l-de">Licht ist das Instrument.</span></h2>
+        <h2><span class="l-en">About me</span><span class="l-de">Über mich</span></h2>
       </div>
       <div class="about-grid">
         <div>
           <p class="l-en">I work at the intersection of lasers, optics, and simulation — building optical setups, running experiments, and modeling photonic systems in code. My focus is turning the physical behavior of light into reliable, measurable engineering.</p>
           <p class="l-de">Ich arbeite an der Schnittstelle von Lasern, Optik und Simulation — ich baue optische Aufbauten, führe Experimente durch und modelliere photonische Systeme im Code. Mein Schwerpunkt liegt darauf, das physikalische Verhalten von Licht in zuverlässige, messbare Technik zu überführen.</p>
-          <p class="l-en">Currently an M.Sc. candidate in Laser and Photonics at Ruhr University Bochum, alongside roles in optical simulation at Eyonex Glass and laser-application research at the LAT chair. I'm drawn to photonics, laser technology, optical modeling, and semiconductor technologies.</p>
-          <p class="l-de">Derzeit M.Sc.-Student der Laser and Photonics an der Ruhr-Universität Bochum, parallel zu Tätigkeiten in der optischen Simulation bei Eyonex Glass und in der Laseranwendungsforschung am Lehrstuhl LAT. Mich begeistern Photonik, Lasertechnik, optische Modellierung und Halbleitertechnologien.</p>
+          <p class="l-en">Currently I split my time between two roles: at Eyonex Glass (Berlin) I model ion-exchanged GRIN lenses for VCSEL beam shaping, and at RUB's Chair for Laser Application Technology I fabricate organic solar cells and laser-structure electrodes. What I enjoy most is closing the loop between simulation and the optical bench — predicting something in Python, then measuring it.</p>
+          <p class="l-de">Derzeit teile ich meine Zeit zwischen zwei Tätigkeiten: Bei Eyonex Glass (Berlin) modelliere ich ionenausgetauschte GRIN-Linsen für die VCSEL-Strahlformung, und am Lehrstuhl für Laseranwendungstechnik der RUB stelle ich organische Solarzellen her und strukturiere Elektroden mit dem Laser. Am meisten reizt mich, den Kreis zwischen Simulation und optischer Bank zu schließen — etwas in Python vorherzusagen und es dann zu messen.</p>
+          <p class="l-en">Away from the lab you'll find me doing astrophotography, playing badminton, or tinkering with small coding projects — and pushing my German from B1 toward B2.</p>
+          <p class="l-de">Abseits des Labors mache ich Astrofotografie, spiele Badminton oder tüftle an kleinen Programmierprojekten — und bringe mein Deutsch von B1 Richtung B2.</p>
         </div>
         <ul class="specs">
           <li><span class="k"><span class="l-en">FOCUS</span><span class="l-de">SCHWERPUNKT</span></span><span class="v"><span class="l-en">Optical simulation, Optoelectronics, Photovoltaics &amp; laser processing</span><span class="l-de">Optische Simulation, Optoelektronik, Photovoltaik &amp; Laserbearbeitung</span></span></li>
           <li><span class="k"><span class="l-en">DEGREE</span><span class="l-de">ABSCHLUSS</span></span><span class="v">M.Sc. Laser &amp; Photonics</span></li>
           <li><span class="k"><span class="l-en">NATIONALITY</span><span class="l-de">NATIONALITÄT</span></span><span class="v"><span class="l-en">Indian</span><span class="l-de">Indisch</span></span></li>
           <li><span class="k"><span class="l-en">BASED</span><span class="l-de">STANDORT</span></span><span class="v"><span class="l-en">Bochum, Germany</span><span class="l-de">Bochum, Deutschland</span></span></li>
-          <li><span class="k">STATUS</span><span class="v"><span class="l-en">Open to roles</span><span class="l-de">Offen für Stellen</span></span></li>
+          <li><span class="k"><span class="l-en">LANGUAGES</span><span class="l-de">SPRACHEN</span></span><span class="v"><span class="l-en">German B1 (working toward B2), English C1, Malayalam, Hindi</span><span class="l-de">Deutsch B1 (B2 in Vorbereitung), Englisch C1, Malayalam, Hindi</span></span></li>
+          <li><span class="k">STATUS</span><span class="v"><span class="l-en">Open to roles in photonics &amp; optical engineering</span><span class="l-de">Offen für Stellen in Photonik und optischer Technik</span></span></li>
         </ul>
       </div>
     </div>
@@ -431,12 +458,14 @@
           <h3>M.Sc. Laser and Photonics</h3>
           <div class="org">Ruhr University Bochum</div>
           <p>Grade: 93/100</p>
+          <p>Expected graduation: 03/2027 · Focus: Laser Material Processing, Optical Design, Adaptive Optics, Fiber Optics</p>
         </div>
         <div class="job l-de">
           <div class="when">04/2025 — Heute</div>
           <h3>M.Sc. Laser and Photonics</h3>
           <div class="org">Ruhr-Universität Bochum</div>
           <p>Note: 93/100</p>
+          <p>Voraussichtlicher Abschluss: 03/2027 · Schwerpunkte: Laser Material Processing, Optical Design, Adaptive Optics, Fiber Optics</p>
         </div>
 
         <div class="job l-en">
@@ -462,7 +491,6 @@
       <div class="sec-head">
         <span class="sec-tag"><span class="l-en">// 03 — experience</span><span class="l-de">// 03 — berufserfahrung</span></span>
         <h2><span class="l-en">Work experience</span><span class="l-de">Berufserfahrung</span></h2>
-        <p><span class="l-en">The beam path so far.</span><span class="l-de">Der bisherige Strahlengang.</span></p>
       </div>
       <div class="timeline">
 
@@ -471,9 +499,9 @@
           <h3>Intern</h3>
           <div class="org">Eyonex Glass, Berlin</div>
           <ul>
-            <li>Simulating a VCSEL–GRIN lens system using the ABCD matrix method.</li>
-            <li>Building Python workflows to analyze and explore optical system parameters.</li>
-            <li>Running numerical simulations with FEMWELL and Meshwell to model optical systems.</li>
+            <li>Simulating ion-exchanged GRIN lenses for VCSEL beam shaping with the ABCD matrix method (complex q-parameter).</li>
+            <li>Validating results against BPM and FEM simulations (FEMWELL, Meshwell) — agreement within ~1%.</li>
+            <li>Python parameter studies across lens diameter, working distance and wavelength (638/850 nm) to optimize focus and divergence.</li>
           </ul>
         </div>
         <div class="job l-de">
@@ -481,9 +509,9 @@
           <h3>Praktikant</h3>
           <div class="org">Eyonex Glass, Berlin</div>
           <ul>
-            <li>Simulation eines VCSEL-GRIN-Linsensystems mit der ABCD-Matrix-Methode.</li>
-            <li>Entwicklung von Python-Workflows zur Analyse und Untersuchung optischer Systemparameter.</li>
-            <li>Durchführung numerischer Simulationen mit FEMWELL und Meshwell zur Modellierung optischer Systeme.</li>
+            <li>Simulation ionenausgetauschter GRIN-Linsen zur VCSEL-Strahlformung (ABCD-Matrix, komplexer q-Parameter).</li>
+            <li>Validierung durch BPM- und FEM-Simulationen (FEMWELL, Meshwell), Abweichung ca. 1 %.</li>
+            <li>Python-Parameterstudien zu Durchmesser, Abstand und Wellenlänge (638/850 nm) zur Fokus- und Divergenzoptimierung.</li>
           </ul>
         </div>
 
@@ -492,9 +520,9 @@
           <h3>Research Assistant</h3>
           <div class="org">Chair for Laser Application Technology (LAT), Ruhr University Bochum</div>
           <ul>
-            <li>Conducting and supporting laser experiments for processing nickel electrodes.</li>
-            <li>Investigating how different process parameters affect surface structures.</li>
-            <li>Characterizing and optimizing layers for organic solar cells.</li>
+            <li>Fabricating and characterizing organic solar cells: up to 12% efficiency with chlorobenzene, 7.5% with the green solvent methyl anisole.</li>
+            <li>Established a reproducible fabrication process across batches of 8–10 cells.</li>
+            <li>Laser structuring of nickel electrodes with varied process parameters; quantifying LIPSS-covered areas via least-squares fitting.</li>
           </ul>
         </div>
         <div class="job l-de">
@@ -502,9 +530,9 @@
           <h3>Wissenschaftliche Hilfskraft</h3>
           <div class="org">Lehrstuhl für Laseranwendungstechnik (LAT), Ruhr-Universität Bochum</div>
           <ul>
-            <li>Durchführung und Unterstützung von Laserexperimenten zur Bearbeitung von Nickelelektroden.</li>
-            <li>Untersuchung des Einflusses verschiedener Prozessparameter auf Oberflächenstrukturen.</li>
-            <li>Charakterisierung und Optimierung von Schichten für organische Solarzellen.</li>
+            <li>Herstellung und Charakterisierung organischer Solarzellen: bis 12 % Wirkungsgrad (Chlorbenzol), 7,5 % mit grünem Methylanisol.</li>
+            <li>Reproduzierbare Fertigung in Chargen von 8–10 Zellen.</li>
+            <li>Laserstrukturierung von Nickelelektroden mit variierten Prozessparametern; LIPSS-Flächenbestimmung per Least-Squares-Fit.</li>
           </ul>
         </div>
 
@@ -518,7 +546,6 @@
       <div class="sec-head">
         <span class="sec-tag"><span class="l-en">// 04 — projects</span><span class="l-de">// 04 — projekte</span></span>
         <h2><span class="l-en">Selected projects</span><span class="l-de">Ausgewählte Projekte</span></h2>
-        <p><span class="l-en">Colour-coded by wavelength.</span><span class="l-de">Nach Wellenlänge farbcodiert.</span></p>
       </div>
       <div class="grid">
 
@@ -527,15 +554,15 @@
           <span class="nm">λ 532 nm · 10/2025 — 12/2025</span>
           <h3>Optical lab practicum</h3>
           <div class="inst">Ruhr University Bochum</div>
-          <p>Set up, aligned, and ran optical experiments; wrote Python tools to analyze beam profiles and M² values; evaluated and documented results in Origin.</p>
-          <div class="tags"><span>Python</span><span>Beam profiling</span><span>M²</span><span>Origin</span></div>
+          <p>Set up and aligned optical experiments, including fiber coupling at ~98% (multimode) and ~70% (single-mode) efficiency; wrote Python tools for beam profiling and M² caustic fits within ~2% of reference values; documented results in Origin.</p>
+          <div class="tags"><span>Python</span><span>Beam profiling</span><span>M²</span><span>Fiber coupling</span><span>Origin</span></div>
         </article>
         <article class="card l-de" style="--accent:var(--w532)">
           <span class="nm">λ 532 nm · 10/2025 — 12/2025</span>
           <h3>Optisches Laborpraktikum</h3>
           <div class="inst">Ruhr-Universität Bochum</div>
-          <p>Aufbau, Justierung und Durchführung optischer Experimente; Python-Programme zur Analyse von Strahlprofilen und M²-Werten; Auswertung und Dokumentation in Origin.</p>
-          <div class="tags"><span>Python</span><span>Strahlanalyse</span><span>M²</span><span>Origin</span></div>
+          <p>Aufbau und Justierung optischer Experimente, darunter Faserkopplung mit ca. 98 % Effizienz (Multimode) und ca. 70 % (Singlemode); Python-Tools für Strahlprofilanalyse und M²-Kaustik-Fits mit ca. 2 % Abweichung von den Referenzwerten; Dokumentation der Ergebnisse in Origin.</p>
+          <div class="tags"><span>Python</span><span>Strahlanalyse</span><span>M²</span><span>Faserkopplung</span><span>Origin</span></div>
         </article>
 
         <!-- Project 2 -->
@@ -543,7 +570,7 @@
           <span class="nm">λ 488 nm · 05/2025 — 07/2025</span>
           <h3>Scientific poster — Advances in adaptive optics for ground-based telescopes</h3>
           <div class="inst">Ruhr University Bochum</div>
-          <p>Researched and produced a scientific poster on adaptive optics for ground-based telescopes, presented at the Faculty of Electrical Engineering &amp; IT.</p>
+          <p>Researched and produced a scientific poster on adaptive optics for ground-based telescopes, presented at the Faculty of Electrical Engineering &amp; IT. Presented to an audience of 100+ — professors, students and external guests.</p>
           <a class="more" href="https://drive.google.com/file/d/1vz6zXEerGSVxcLZttOLdAVujgWVabTWY/view?usp=sharing" target="_blank" rel="noopener">View poster →</a>
           <div class="tags"><span>Adaptive optics</span><span>Research</span><span>Poster</span></div>
         </article>
@@ -551,7 +578,7 @@
           <span class="nm">λ 488 nm · 05/2025 — 07/2025</span>
           <h3>Wissenschaftliches Poster — Fortschritte in der adaptiven Optik für bodengebundene Teleskope</h3>
           <div class="inst">Ruhr-Universität Bochum</div>
-          <p>Recherche und Erstellung eines wissenschaftlichen Posters zum Einsatz adaptiver Optik in bodengebundenen Teleskopen, präsentiert an der Fakultät für Elektrotechnik und Informationstechnik.</p>
+          <p>Recherche und Erstellung eines wissenschaftlichen Posters zum Einsatz adaptiver Optik in bodengebundenen Teleskopen, präsentiert an der Fakultät für Elektrotechnik und Informationstechnik. Präsentiert vor über 100 Teilnehmenden — Professoren, Studierende und externe Gäste.</p>
           <a class="more" href="https://drive.google.com/file/d/1vz6zXEerGSVxcLZttOLdAVujgWVabTWY/view?usp=sharing" target="_blank" rel="noopener">Poster ansehen →</a>
           <div class="tags"><span>Adaptive Optik</span><span>Recherche</span><span>Poster</span></div>
         </article>
@@ -574,14 +601,14 @@
 
         <!-- Project 4 -->
         <article class="card l-en" style="--accent:var(--w633)">
-          <span class="nm">λ 633 nm · 10.2024 - 12.2024</span>
+          <span class="nm">λ 633 nm · 10/2025 — 12/2025</span>
           <h3>Laser processing — spot size &amp; ablation parameters</h3>
           <div class="inst">Ruhr University Bochum</div>
           <p>Determined the spot size of a CO₂ laser and calculated the ideal cutting parameters for PMMA modules. Worked out the ideal parameters for selective ablation of an ITO layer from thin PET substrates via backside ablation.</p>
           <div class="tags"><span>CO₂ laser</span><span>PMMA</span><span>ITO</span><span>Backside ablation</span></div>
         </article>
         <article class="card l-de" style="--accent:var(--w633)">
-          <span class="nm">λ 633 nm · 2025</span>
+          <span class="nm">λ 633 nm · 10/2025 — 12/2025</span>
           <h3>Laserbearbeitung — Spotgröße &amp; Ablationsparameter</h3>
           <div class="inst">Ruhr-Universität Bochum</div>
           <p>Bestimmung der Spotgröße eines CO₂-Lasers und Berechnung der idealen Schneidparameter für PMMA-Module. Erarbeitung der idealen Parameter für die selektive Ablation einer ITO-Schicht von dünnen PET-Substraten durch rückseitige Ablation.</p>
@@ -593,15 +620,15 @@
           <span class="nm">λ 532 nm · 12/2023 — 05/2024</span>
           <h3>Bachelor's thesis — Battery management systems &amp; state-of-charge estimation of lithium-ion batteries</h3>
           <div class="inst">Indian Institute of Technology (ISM), Dhanbad</div>
-          <p>Developed a lithium-ion battery model accounting for various losses; used Random Forest and Least Squares to predict state of charge (SOC); compared results against classical methods.</p>
-          <div class="tags"><span>Lithium-ion batteries</span><span>SOC estimation</span><span>Random Forest</span><span>Least Squares</span></div>
+          <p>Developed an equivalent circuit model (ECM) for lithium-ion batteries; estimated state of charge with Random Forest and least squares; reached 92–93% model accuracy against experimental data, depending on battery type.</p>
+          <div class="tags"><span>Lithium-ion batteries</span><span>SOC estimation</span><span>ECM</span><span>Random Forest</span><span>Least Squares</span></div>
         </article>
         <article class="card l-de" style="--accent:var(--w532)">
           <span class="nm">λ 532 nm · 12/2023 — 05/2024</span>
           <h3>Bachelorarbeit — Batteriemanagementsysteme und Ladezustandsschätzung von Lithium-Ionen-Batterien</h3>
           <div class="inst">Indian Institute of Technology (ISM), Dhanbad</div>
-          <p>Entwicklung eines Batteriemodells für Lithium-Ionen-Batterien unter Berücksichtigung verschiedener Verluste; Nutzung von Random Forest und Least Squares zur Vorhersage des Ladezustands (SOC); Vergleich der Ergebnisse mit klassischen Methoden.</p>
-          <div class="tags"><span>Lithium-Ionen-Batterien</span><span>SOC-Schätzung</span><span>Random Forest</span><span>Least Squares</span></div>
+          <p>Entwicklung eines Ersatzschaltbildmodells (ECM) für Lithium-Ionen-Batterien; Ladezustandsschätzung mit Random Forest und Least Squares; 92–93 % Modellgenauigkeit gegenüber experimentellen Daten, je nach Batterietyp.</p>
+          <div class="tags"><span>Lithium-Ionen-Batterien</span><span>SOC-Schätzung</span><span>ECM</span><span>Random Forest</span><span>Least Squares</span></div>
         </article>
 
       </div>
@@ -623,14 +650,14 @@
           <div class="tags"><span>Python</span><span>MATLAB</span><span>C</span><span>C++</span><span>Java</span></div></div>
 
         <div class="skill-cat l-en"><h3>Simulation &amp; modeling</h3>
-          <div class="tags"><span>FEMWELL</span><span>Meshwell</span><span>ABCD matrix method</span></div></div>
+          <div class="tags"><span>FEMWELL</span><span>Meshwell</span><span>ABCD matrix method</span><span>Split-Step BPM</span></div></div>
         <div class="skill-cat l-de"><h3>Simulation &amp; Modellierung</h3>
-          <div class="tags"><span>FEMWELL</span><span>Meshwell</span><span>ABCD-Matrix-Methode</span></div></div>
+          <div class="tags"><span>FEMWELL</span><span>Meshwell</span><span>ABCD-Matrix-Methode</span><span>Split-Step BPM</span></div></div>
 
         <div class="skill-cat l-en"><h3>Software &amp; tools</h3>
-          <div class="tags"><span>LaTeX</span><span>Jupyter</span><span>Origin</span><span>AutoCAD Inventor</span><span>SQL</span><span>Keithley Kickstart</span><span>LightBurn</span><span>Git</span><span>VS Code</span></div></div>
+          <div class="tags"><span>LaTeX</span><span>Jupyter</span><span>Origin</span><span>Autodesk Inventor</span><span>SQL</span><span>Keithley Kickstart</span><span>LightBurn</span><span>Git</span><span>VS Code</span></div></div>
         <div class="skill-cat l-de"><h3>Software &amp; Werkzeuge</h3>
-          <div class="tags"><span>LaTeX</span><span>Jupyter</span><span>Origin</span><span>AutoCAD Inventor</span><span>SQL</span><span>Keithley Kickstart</span><span>LightBurn</span><span>Git</span><span>VS Code</span></div></div>
+          <div class="tags"><span>LaTeX</span><span>Jupyter</span><span>Origin</span><span>Autodesk Inventor</span><span>SQL</span><span>Keithley Kickstart</span><span>LightBurn</span><span>Git</span><span>VS Code</span></div></div>
 
         <div class="skill-cat l-en"><h3>Lab &amp; research</h3>
           <div class="tags"><span>Optical alignment</span><span>Laser processing</span><span>Fiber coupling</span><span>Beam analysis</span><span>Thin-film characterization</span><span>Data analysis</span></div></div>
@@ -655,15 +682,15 @@
       </div>
       <div class="ach">
         <div class="item">
-          <div class="num" data-count-to="5384">0</div>
+          <div class="num" data-count-to="5384">5384</div>
           <p><span class="l-en">Rank in JEE Advanced 2020 — among more than 150,000 candidates nationwide.</span><span class="l-de">Rang im JEE Advanced 2020 — unter mehr als 150.000 Teilnehmenden bundesweit.</span></p>
         </div>
         <div class="item">
-          <div class="num" data-count-to="96.8" data-decimals="1" data-suffix="%">0%</div>
+          <div class="num" data-count-to="96.8" data-decimals="1" data-suffix="%">96.8%</div>
           <p><span class="l-en">Percentile in JEE Main 2020 — among over 1.1 million candidates.</span><span class="l-de">Perzentil im JEE Main 2020 — unter mehr als 1,1 Millionen Teilnehmenden.</span></p>
         </div>
         <div class="item">
-          <div class="num" data-count-to="160">0</div>
+          <div class="num" data-count-to="160">160</div>
           <p><span class="l-en">Rank in KEAM 2020 — among more than 70,000 candidates.</span><span class="l-de">Rang im KEAM 2020 — unter mehr als 70.000 Teilnehmenden.</span></p>
         </div>
       </div>
@@ -740,10 +767,16 @@
     if(!photon) return;
     var fine = matchMedia('(pointer:fine)').matches;
     if(!fine || reduceMotion){ photon.style.display='none'; return; }
+    var h1 = document.querySelector('.hero h1');
     addEventListener('mousemove', function(e){
       photon.style.left = e.clientX + 'px';
       photon.style.top  = e.clientY + 'px';
       photon.classList.add('live');
+      if(h1){
+        var r = h1.getBoundingClientRect();
+        h1.style.setProperty('--lx', (e.clientX - r.left) + 'px');
+        h1.style.setProperty('--ly', (e.clientY - r.top) + 'px');
+      }
     });
     document.addEventListener('mouseleave', function(){ photon.classList.remove('live'); });
   })();
