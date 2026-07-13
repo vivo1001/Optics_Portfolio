@@ -55,6 +55,9 @@
         <a href="#contact"><span class="l-en">Contact</span><span class="l-de">Kontakt</span></a>
       </nav>
       <div class="nav-right">
+        <button id="gameBtn" type="button" class="game-btn" aria-pressed="false">
+          λ&nbsp;<span class="l-en">PLAY</span><span class="l-de">SPIEL</span>
+        </button>
         <div class="lang-toggle" role="group" aria-label="Language">
           <button id="langEn" type="button" class="active">EN</button>
           <button id="langDe" type="button">DE</button>
@@ -77,6 +80,7 @@
       <div class="photon-beam"></div>
     </div>
     <div class="wrap hero-inner">
+      <div class="hero-copy">
       <div class="eyebrow">
         <span class="l-en">PHOTONICS · OPTICAL SYSTEMS · SIMULATION · OPTOELECTRONICS · PHOTOVOLTAICS</span>
         <span class="l-de">PHOTONIK · OPTISCHE SYSTEME · SIMULATION · OPTOELEKTRONIK · PHOTOVOLTAIK</span>
@@ -97,6 +101,9 @@
         <a class="btn-solid" href="#projects"><span class="l-en">View projects</span><span class="l-de">Projekte ansehen</span></a>
         <a class="btn-ghost" href="#contact"><span class="l-en">Get in touch</span><span class="l-de">Kontakt aufnehmen</span></a>
       </div>
+      </div>
+      <!-- photo rebuilt from photon dots; plain photo fallback when pixel reads are blocked -->
+      <canvas class="hero-portrait" id="portrait" role="img" aria-label="Vivek Harikumar"></canvas>
     </div>
   </section>
 
@@ -404,6 +411,35 @@
     <span>© 2026 Vivek Harikumar</span>
     <span><span class="l-en">BUILT ON AN OPTICAL BENCH</span><span class="l-de">AUF EINER OPTISCHEN BANK GEBAUT</span></span>
   </footer>
+
+  <!-- GAME MODE: pilot a photon across the page; cards act as mirrors -->
+  <div id="game" hidden>
+    <canvas id="gameCanvas"></canvas>
+    <div class="game-hud">
+      <span class="game-chips">
+        <i data-orb="405" style="--c:var(--w405)">405</i>
+        <i data-orb="488" style="--c:var(--w488)">488</i>
+        <i data-orb="532" style="--c:var(--w532)">532</i>
+        <i data-orb="633" style="--c:var(--w633)">633</i>
+      </span>
+      <span class="game-time" id="gameTime">0.0 s</span>
+    </div>
+    <div class="game-help">
+      <span class="l-en">←→ or A/D to steer — light doesn't brake. Bounce off the cards, collect all four wavelengths. Esc exits.</span>
+      <span class="l-de">←→ oder A/D zum Lenken — Licht bremst nicht. An den Karten abprallen, alle vier Wellenlängen einsammeln. Esc beendet.</span>
+    </div>
+    <div class="game-win" id="gameWin" hidden>
+      <h3><span class="l-en">SPECTRUM COMPLETE</span><span class="l-de">SPEKTRUM VOLLSTÄNDIG</span></h3>
+      <p>
+        <span class="l-en">All four wavelengths captured in <b class="game-final"></b>.</span>
+        <span class="l-de">Alle vier Wellenlängen eingefangen in <b class="game-final"></b>.</span>
+      </p>
+      <div class="row">
+        <button type="button" class="btn-solid" id="gameAgain"><span class="l-en">Run it again</span><span class="l-de">Nochmal</span></button>
+        <button type="button" class="btn-ghost" id="gameExit"><span class="l-en">Back to portfolio</span><span class="l-de">Zurück zum Portfolio</span></button>
+      </div>
+    </div>
+  </div>
 
 <script src="script.js"></script>
 </body>

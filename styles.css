@@ -168,7 +168,9 @@ header.scrolled{border-bottom-color:var(--line)}
 .lens{position:absolute; top:62%; transform:translateY(-50%); width:14px; height:78px; border-radius:50%; border:1px solid var(--line); background:radial-gradient(ellipse at center, rgba(31,224,140,.10), transparent 70%)}
 .lens.l1{left:28%} .lens.l2{left:54%} .lens.l3{left:79%}
 
-.hero-inner{position:relative; z-index:2; width:100%}
+.hero-inner{position:relative; z-index:2; width:100%; display:flex; align-items:center; gap:56px}
+.hero-copy{flex:1; min-width:0}
+.hero-portrait{flex:0 0 auto; width:min(30vw,340px); aspect-ratio:1/1; border-radius:50%}
 .eyebrow{font-family:var(--font-mono); font-size:13px; letter-spacing:.16em; color:var(--w532); margin-bottom:22px; display:flex; align-items:center; gap:12px}
 .greeting{font-size:clamp(1rem,2.2vw,1.25rem);font-weight:500;color:var(--text);margin-bottom:12px}
 /* headline lit by a laser spot that follows the cursor (--lx/--ly set in JS;
@@ -256,13 +258,14 @@ footer{border-top:1px solid var(--line);padding:32px 0;display:flex;justify-cont
 /* ============================================================
    ENTRANCE + SCROLL REVEAL (only when .fx is on <html>)
    ============================================================ */
-.fx .hero-inner > *{opacity:0; transform:translateY(22px); transition:opacity .8s ease, transform .8s ease}
-body.loaded .hero-inner > *{opacity:1;transform:none}
-body.loaded .hero-inner > *:nth-child(1){transition-delay:.05s}
-body.loaded .hero-inner > *:nth-child(2){transition-delay:.15s}
-body.loaded .hero-inner > *:nth-child(3){transition-delay:.27s}
-body.loaded .hero-inner > *:nth-child(4){transition-delay:.39s}
-body.loaded .hero-inner > *:nth-child(5){transition-delay:.51s}
+.fx .hero-copy > *, .fx .hero-portrait{opacity:0; transform:translateY(22px); transition:opacity .8s ease, transform .8s ease}
+body.loaded .hero-copy > *, body.loaded .hero-portrait{opacity:1;transform:none}
+body.loaded .hero-copy > *:nth-child(1){transition-delay:.05s}
+body.loaded .hero-copy > *:nth-child(2){transition-delay:.15s}
+body.loaded .hero-copy > *:nth-child(3){transition-delay:.27s}
+body.loaded .hero-copy > *:nth-child(4){transition-delay:.39s}
+body.loaded .hero-copy > *:nth-child(5){transition-delay:.51s}
+body.loaded .hero-portrait{transition-delay:.45s}
 
 .fx .sec-head,
 .fx .about-grid > *,
@@ -283,10 +286,57 @@ body.loaded .hero-inner > *:nth-child(5){transition-delay:.51s}
 .fx .contact > .wrap > *:nth-child(4){transition-delay:.24s}
 
 /* ============================================================
+   GAME MODE — photon overlay; canvas sits over the real page
+   ============================================================ */
+.game-btn{
+  background:none;border:1px solid var(--line);border-radius:6px;color:var(--muted);
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.05em;
+  padding:7px 10px;cursor:pointer;white-space:nowrap;
+  transition:color .2s ease,border-color .2s ease;
+}
+.game-btn:hover{color:var(--w532);border-color:var(--w532)}
+body.gaming .game-btn{background:var(--w532);border-color:var(--w532);color:var(--bg)}
+#game{position:fixed;inset:0;z-index:80;pointer-events:none}
+#game canvas{position:absolute;inset:0}
+.game-hud{
+  position:absolute;top:82px;left:50%;transform:translateX(-50%);
+  display:flex;gap:16px;align-items:center;
+  font-family:var(--font-mono);font-size:12px;
+  background:rgba(7,9,15,.85);border:1px solid var(--line);border-radius:8px;padding:8px 14px;
+}
+.game-chips{display:flex;gap:10px}
+.game-chips i{font-style:normal;color:var(--c);opacity:.25;letter-spacing:.05em;transition:opacity .3s ease}
+.game-chips i.got{opacity:1;text-shadow:0 0 10px var(--c)}
+.game-time{color:var(--muted)}
+.game-help{
+  position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+  font-family:var(--font-mono);font-size:12px;color:var(--muted);white-space:nowrap;
+  background:rgba(7,9,15,.85);border:1px solid var(--line);border-radius:8px;padding:8px 14px;
+}
+.game-win{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  text-align:center;pointer-events:auto;
+  background:var(--surface);border:1px solid var(--w532);border-radius:12px;
+  padding:36px 44px;box-shadow:var(--glow);
+}
+.game-win h3{
+  font-size:1.5rem;margin-bottom:10px;
+  background:linear-gradient(90deg,var(--w405),var(--w488),var(--w532),var(--w633));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.game-win p{color:var(--muted);margin:0 0 22px}
+.game-win .row{display:flex;gap:12px;justify-content:center}
+.game-win button{cursor:pointer}
+.game-win .btn-ghost{background:none}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width:820px){
   .nav-links{display:none}
+  .game-btn{display:none} /* keyboard game — no touch controls */
+  .hero-inner{flex-direction:column;align-items:flex-start;gap:40px;padding-top:96px;padding-bottom:48px}
+  .hero-portrait{width:min(64vw,300px)}
   .about-grid{grid-template-columns:1fr;gap:28px}
   .grid{grid-template-columns:1fr}
   .skills{grid-template-columns:1fr}
@@ -303,7 +353,8 @@ body.loaded .hero-inner > *:nth-child(5){transition-delay:.51s}
   *{animation:none !important; transition:none !important; scroll-behavior:auto !important}
   #loader{display:none}
   #photon{display:none}
-  .fx .hero-inner > *,
+  .fx .hero-copy > *,
+  .fx .hero-portrait,
   .fx .sec-head,
   .fx .about-grid > *,
   .fx .timeline .job,
