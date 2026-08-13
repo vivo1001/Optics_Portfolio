@@ -1,0 +1,45 @@
+/* ============================================================
+   LOADING SCREEN — emitter charges, beam fires up, flash, clear
+   ============================================================ */
+#loader{
+  position:fixed; inset:0; z-index:1000; background:var(--bg);
+  transition:opacity .6s ease, visibility .6s ease;
+}
+#loader.done{opacity:0;visibility:hidden;pointer-events:none}
+.firing{position:absolute; inset:0; overflow:hidden}
+.emitter{
+  position:absolute; bottom:64px; left:50%; transform:translateX(-50%);
+  width:62px; height:16px; border-radius:4px;
+  background:linear-gradient(var(--surface-2),#05070c);
+  border:1px solid var(--line); box-shadow:0 0 0 4px rgba(0,0,0,.4);
+}
+.emitter::after{
+  content:""; position:absolute; left:50%; top:50%;
+  width:9px; height:9px; border-radius:50%; transform:translate(-50%,-50%);
+  background:var(--w532); box-shadow:0 0 16px 5px rgba(31,224,140,.9);
+  animation:charge .85s ease-in-out infinite alternate;
+}
+@keyframes charge{from{opacity:.35;scale:.55}to{opacity:1;scale:1.3}}
+.beam{
+  position:absolute; bottom:80px; left:50%; transform:translateX(-50%);
+  width:3px; height:0; animation:fire .7s cubic-bezier(.2,.7,.2,1) 1.1s forwards;
+}
+.beam.center{
+  background:linear-gradient(to top, var(--w532) 0%, #fff 55%, transparent);
+  box-shadow:0 0 16px 3px rgba(31,224,140,.85), 0 0 60px 14px rgba(31,224,140,.3); z-index:2;
+}
+.beam.violet{left:calc(50% - 11px);background:linear-gradient(to top,var(--w405),transparent);box-shadow:0 0 12px var(--w405);opacity:.55;animation-delay:1.16s}
+.beam.red{left:calc(50% + 11px);background:linear-gradient(to top,var(--w633),transparent);box-shadow:0 0 12px var(--w633);opacity:.55;animation-delay:1.16s}
+@keyframes fire{ to{ height:calc(100% - 80px) } }
+.flash{
+  position:absolute; inset:0; opacity:0; z-index:3;
+  background:radial-gradient(ellipse 60% 50% at 50% 0%, rgba(31,224,140,.7), rgba(31,224,140,.12) 45%, transparent 75%);
+  animation:flash .6s ease-out 1.75s forwards;
+}
+@keyframes flash{0%{opacity:0}40%{opacity:1}100%{opacity:0}}
+.load-label{
+  position:absolute; bottom:30px; left:50%; transform:translateX(-50%); z-index:4;
+  font-family:var(--font-mono); font-size:12px; letter-spacing:.2em; color:var(--muted); white-space:nowrap;
+}
+.load-label .pct{color:var(--w532)}
+

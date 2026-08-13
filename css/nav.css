@@ -1,0 +1,47 @@
+/* ============================================================
+   CURSOR GLOW + SCROLL PROGRESS
+   ============================================================ */
+#photon{
+  position:fixed; width:460px; height:460px; border-radius:50%;
+  pointer-events:none; z-index:60; opacity:0; transform:translate(-50%,-50%);
+  background:radial-gradient(circle, rgba(31,224,140,.12) 0%, rgba(24,199,230,.05) 35%, transparent 62%);
+  mix-blend-mode:screen; transition:opacity .5s ease;
+}
+#photon.live{opacity:1}
+#progress{
+  position:fixed; top:0; left:0; height:2px; width:0; z-index:60;
+  background:linear-gradient(90deg,var(--w405),var(--w488),var(--w532),var(--w633));
+  box-shadow:0 0 10px rgba(31,224,140,.6); transition:width .08s linear;
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+header{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  backdrop-filter:blur(10px);
+  background:linear-gradient(var(--bg), rgba(7,9,15,.4));
+  border-bottom:1px solid transparent; transition:border-color .3s ease;
+}
+header.scrolled{border-bottom-color:var(--line)}
+.nav{display:flex; align-items:center; justify-content:space-between; height:68px; gap:18px}
+.brand{font-family:var(--font-display); font-weight:700; font-size:15px; letter-spacing:.04em; display:flex; align-items:center; gap:9px; white-space:nowrap}
+.brand .dot{width:9px; height:9px; border-radius:50%; background:var(--w532); box-shadow:var(--glow)}
+.nav-links{display:flex; gap:18px; align-items:center}
+.nav-links a{font-size:13px; color:var(--muted); font-weight:500; transition:color .2s ease; position:relative; white-space:nowrap}
+.nav-links a:hover{color:var(--text)}
+.nav-links a::after{
+  content:""; position:absolute; left:0; right:100%; bottom:-7px; height:1px;
+  background:var(--w532); box-shadow:0 0 8px var(--w532); transition:right .25s ease;
+}
+.nav-links a:hover::after, .nav-links a.active::after{right:0}
+.nav-links a.active{color:var(--text)}
+.nav-right{display:flex; align-items:center; gap:12px}
+.cv-btn{
+  font-family:var(--font-display); font-weight:600; font-size:13px; letter-spacing:.02em;
+  padding:9px 16px; border-radius:6px; color:var(--bg); background:var(--w532);
+  border:1px solid var(--w532); box-shadow:0 0 18px rgba(31,224,140,.35);
+  transition:transform .15s ease, box-shadow .25s ease; display:inline-flex; align-items:center; gap:8px; white-space:nowrap;
+}
+.cv-btn:hover{transform:translateY(-1px);box-shadow:0 0 28px rgba(31,224,140,.6)}
+

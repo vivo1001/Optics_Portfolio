@@ -1,0 +1,44 @@
+/* ============================================================
+   GAME MODE — photon overlay; canvas sits over the real page
+   ============================================================ */
+.game-btn{
+  background:none;border:1px solid var(--line);border-radius:6px;color:var(--muted);
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.05em;
+  padding:7px 10px;cursor:pointer;white-space:nowrap;
+  transition:color .2s ease,border-color .2s ease;
+}
+.game-btn:hover{color:var(--w532);border-color:var(--w532)}
+body.gaming .game-btn{background:var(--w532);border-color:var(--w532);color:var(--bg)}
+#game{position:fixed;inset:0;z-index:80;pointer-events:none}
+#game canvas{position:absolute;inset:0}
+.game-hud{
+  position:absolute;top:82px;left:50%;transform:translateX(-50%);
+  display:flex;gap:16px;align-items:center;
+  font-family:var(--font-mono);font-size:12px;
+  background:rgba(7,9,15,.85);border:1px solid var(--line);border-radius:8px;padding:8px 14px;
+}
+.game-chips{display:flex;gap:10px}
+.game-chips i{font-style:normal;color:var(--c);opacity:.25;letter-spacing:.05em;transition:opacity .3s ease}
+.game-chips i.got{opacity:1;text-shadow:0 0 10px var(--c)}
+.game-time{color:var(--muted)}
+.game-help{
+  position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+  font-family:var(--font-mono);font-size:12px;color:var(--muted);white-space:nowrap;
+  background:rgba(7,9,15,.85);border:1px solid var(--line);border-radius:8px;padding:8px 14px;
+}
+.game-win{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  text-align:center;pointer-events:auto;
+  background:var(--surface);border:1px solid var(--w532);border-radius:12px;
+  padding:36px 44px;box-shadow:var(--glow);
+}
+.game-win h3{
+  font-size:1.5rem;margin-bottom:10px;
+  background:linear-gradient(90deg,var(--w405),var(--w488),var(--w532),var(--w633));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.game-win p{color:var(--muted);margin:0 0 22px}
+.game-win .row{display:flex;gap:12px;justify-content:center}
+.game-win button{cursor:pointer}
+.game-win .btn-ghost{background:none}
+

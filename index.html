@@ -18,7 +18,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<!-- load order = cascade order; keep base first -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/loader.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/hero.css">
+<link rel="stylesheet" href="css/sections.css">
+<link rel="stylesheet" href="css/reveal.css">
+<link rel="stylesheet" href="css/game.css">
+<link rel="stylesheet" href="css/responsive.css">
 <noscript><style>#loader{display:none}</style></noscript>
 </head>
 <body class="lang-en">
@@ -240,7 +248,23 @@
       </div>
       <div class="grid">
 
-        <!-- Project 1 -->
+        <!-- Project 1 — M.Sc. project -->
+        <article class="card l-en" style="--accent:var(--w633)">
+          <span class="nm">230–320 GHz · 06/2026 — 07/2026</span>
+          <h3>Terahertz computed tomography: Signal processing, reconstruction &amp; image registration</h3>
+          <div class="inst">Ruhr University Bochum</div>
+          <p>Developed an end-to-end Python pipeline for FMCW radar spectra (230–320 GHz), generating calibrated sinograms and cross-sectional images using filtered back-projection. Developed a rotation- and translation-invariant image registration method using Fourier–Mellin phase correlation, improving Pearson correlation from 0.16 to 0.99 with ±0.001° angular accuracy.</p>
+          <div class="tags"><span>Python</span><span>FMCW radar</span><span>Filtered back-projection</span><span>Image registration</span><span>Fourier–Mellin</span></div>
+        </article>
+        <article class="card l-de" style="--accent:var(--w633)">
+          <span class="nm">230–320 GHz · 06/2026 — 07/2026</span>
+          <h3>Terahertz-Computertomographie: Signalverarbeitung, Rekonstruktion &amp; Bildregistrierung</h3>
+          <div class="inst">Ruhr-Universität Bochum</div>
+          <p>Entwicklung einer durchgängigen Python-Pipeline für FMCW-Radarspektren (230–320 GHz), die kalibrierte Sinogramme und Querschnittsbilder mittels gefilterter Rückprojektion erzeugt. Entwicklung eines rotations- und translationsinvarianten Bildregistrierungsverfahrens mittels Fourier–Mellin-Phasenkorrelation, das die Pearson-Korrelation von 0,16 auf 0,99 verbesserte, bei einer Winkelgenauigkeit von ±0,001°.</p>
+          <div class="tags"><span>Python</span><span>FMCW-Radar</span><span>Gefilterte Rückprojektion</span><span>Bildregistrierung</span><span>Fourier–Mellin</span></div>
+        </article>
+
+        <!-- Project 2 -->
         <article class="card l-en" style="--accent:var(--w532)">
           <span class="nm">λ 532 nm · 10/2025 — 12/2025</span>
           <h3>Optical lab practicum</h3>
@@ -256,7 +280,7 @@
           <div class="tags"><span>Python</span><span>Strahlanalyse</span><span>M²</span><span>Faserkopplung</span><span>Origin</span></div>
         </article>
 
-        <!-- Project 2 -->
+        <!-- Project 3 -->
         <article class="card l-en" style="--accent:var(--w488)">
           <span class="nm">λ 488 nm · 05/2025 — 07/2025</span>
           <h3>Scientific poster — Advances in adaptive optics for ground-based telescopes</h3>
@@ -274,7 +298,7 @@
           <div class="tags"><span>Adaptive Optik</span><span>Recherche</span><span>Poster</span></div>
         </article>
 
-        <!-- Project 3 -->
+        <!-- Project 4 -->
         <article class="card l-en" style="--accent:var(--w405)">
           <span class="nm">λ 405 nm · 12/2023 — 05/2024</span>
           <h3>Photodetectors from reduced graphene oxide</h3>
@@ -290,7 +314,7 @@
           <div class="tags"><span>ZnO-Nanodrähte</span><span>rGO</span><span>FESEM</span><span>Raman</span></div>
         </article>
 
-        <!-- Project 4 -->
+        <!-- Project 5 -->
         <article class="card l-en" style="--accent:var(--w633)">
           <span class="nm">λ 633 nm · 10/2025 — 12/2025</span>
           <h3>Laser processing — spot size &amp; ablation parameters</h3>
@@ -306,7 +330,7 @@
           <div class="tags"><span>CO₂-Laser</span><span>PMMA</span><span>ITO</span><span>Rückseitige Ablation</span></div>
         </article>
 
-        <!-- Project 5 -->
+        <!-- Project 6 -->
         <article class="card l-en" style="--accent:var(--w532)">
           <span class="nm">λ 532 nm · 12/2023 — 05/2024</span>
           <h3>Bachelor's thesis — Battery management systems &amp; state-of-charge estimation of lithium-ion batteries</h3>
@@ -425,8 +449,8 @@
       <span class="game-time" id="gameTime">0.0 s</span>
     </div>
     <div class="game-help">
-      <span class="l-en">←→ or A/D to steer — light doesn't brake. Bounce off the cards, collect all four wavelengths. Esc exits.</span>
-      <span class="l-de">←→ oder A/D zum Lenken — Licht bremst nicht. An den Karten abprallen, alle vier Wellenlängen einsammeln. Esc beendet.</span>
+      <span class="l-en">←→ / A/D or touch to steer — light doesn't brake. Bounce off the cards, collect all four wavelengths. Esc or λ exits.</span>
+      <span class="l-de">←→ / A/D oder Touch zum Lenken — Licht bremst nicht. An den Karten abprallen, alle vier Wellenlängen einsammeln. Esc oder λ beendet.</span>
     </div>
     <div class="game-win" id="gameWin" hidden>
       <h3><span class="l-en">SPECTRUM COMPLETE</span><span class="l-de">SPEKTRUM VOLLSTÄNDIG</span></h3>
@@ -441,6 +465,16 @@
     </div>
   </div>
 
-<script src="script.js"></script>
+<!-- classic scripts, not modules: modules are blocked over file://, and core.js
+     defines the reduceMotion / REVEAL_SEL globals the rest read -->
+<script src="js/core.js"></script>
+<script src="js/loader.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/cursor.js"></script>
+<script src="js/reveal.js"></script>
+<script src="js/counters.js"></script>
+<script src="js/lang.js"></script>
+<script src="js/game.js"></script>
+<script src="js/portrait.js"></script>
 </body>
 </html>

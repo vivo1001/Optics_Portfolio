@@ -1,0 +1,64 @@
+/* ============================================================
+   Wavelength-coded palette — visible spectrum mapped to hex.
+   The page is an optical bench: dark, with light as the accent.
+   ============================================================ */
+:root{
+  --bg:        #07090F;
+  --surface:   #0D111B;
+  --surface-2: #131826;
+  --line:      #1E2536;
+  --text:      #E9EDF6;
+  --muted:     #8A96AE;
+
+  --w405: #6C2BD9;   /* 405 nm  violet diode */
+  --w488: #18C7E6;   /* 488 nm  argon cyan   */
+  --w532: #1FE08C;   /* 532 nm  green (primary) */
+  --w633: #FF435E;   /* 633 nm  HeNe red     */
+
+  --beam: var(--w532);
+  --glow: 0 0 24px rgba(31,224,140,.55), 0 0 64px rgba(31,224,140,.25);
+
+  --font-display:'Chakra Petch', system-ui, sans-serif;
+  --font-body:'Inter', system-ui, sans-serif;
+  --font-mono:'JetBrains Mono', ui-monospace, monospace;
+
+  --maxw: 1080px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:var(--font-body); line-height:1.65;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+body::before{ /* optical breadboard grid */
+  content:""; position:fixed; inset:0; z-index:-2;
+  background-image:
+    linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+  background-size:34px 34px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 80%);
+}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--font-display);font-weight:700;line-height:1.05;margin:0}
+::selection{background:var(--w532);color:var(--bg)}
+:focus-visible{outline:2px solid var(--w488);outline-offset:3px;border-radius:2px}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+/* ============================================================
+   LANGUAGE TOGGLE — every translatable string exists twice
+   (.l-en / .l-de); the body class decides which set shows.
+   ============================================================ */
+body.lang-en .l-de{display:none}
+body.lang-de .l-en{display:none}
+.lang-toggle{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.lang-toggle button{
+  background:none;border:0;color:var(--muted);
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.05em;
+  padding:7px 10px;cursor:pointer;transition:color .2s ease,background .2s ease;
+}
+.lang-toggle button:hover{color:var(--text)}
+.lang-toggle button.active{background:var(--w532);color:var(--bg)}
+
