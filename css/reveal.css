@@ -16,6 +16,8 @@ body.loaded .hero-portrait{transition-delay:.45s}
 .fx .grid > .card,
 .fx .skills > .skill-cat,
 .fx .ach > .item,
+.fx .band,
+.fx .hobby-note,
 .fx .contact > .wrap > *{
   opacity:0; transform:translateY(26px);
   transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);

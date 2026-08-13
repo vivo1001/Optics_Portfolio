@@ -1,0 +1,3 @@
+# Camera originals: multi-MB each, and git keeps them forever.
+# Only the generated img/ derivatives belong in the repo.
+photos-src/

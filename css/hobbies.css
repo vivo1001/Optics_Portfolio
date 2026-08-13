@@ -1,0 +1,49 @@
+/* ============================================================
+   HOBBIES — auto-scrolling photo band; the centre tile is lit,
+   the edges fade out into the page (the vignette)
+   ============================================================ */
+.band{
+  --band-speed:.6;                 /* px per frame, read by js/gallery.js */
+  display:flex; gap:16px; overflow-x:auto; padding:26px 0 8px;
+  scrollbar-width:none;            /* the motion is the affordance, not a bar */
+  /* the vignette: fades to whatever sits behind, so it stays right on any bg */
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+}
+.band::-webkit-scrollbar{display:none}
+.band figure{margin:0; flex:0 0 clamp(200px,22vw,280px)}
+
+.band .shot{
+  display:block; width:100%; padding:0; border:1px solid var(--line);
+  border-radius:12px; overflow:hidden; background:var(--surface-2); cursor:pointer;
+  filter:brightness(.5) saturate(.65); transform:scale(.93);
+  transition:filter .45s ease, transform .45s ease, border-color .45s ease;
+}
+.band .is-lit .shot{filter:none; transform:scale(1.08); border-color:rgba(31,224,140,.4)}
+.band .shot:focus-visible{outline:2px solid var(--w532); outline-offset:3px}
+/* aspect-ratio holds the tile's shape before the image arrives — no layout shift */
+.band .shot img{display:block; width:100%; aspect-ratio:4/3; object-fit:cover}
+
+.hobby-note{margin-top:34px}
+.hobby-note p{color:var(--muted); max-width:620px; margin:0}
+
+/* ---- lightbox ---- */
+.lb{
+  border:0; padding:0; background:transparent; max-width:100vw; max-height:100vh;
+  width:100%; height:100%;
+}
+.lb::backdrop{background:rgba(4,6,8,.92)}
+.lb-inner{
+  position:relative; width:100%; height:100%;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+}
+.lb-inner img{max-width:min(92vw,1400px); max-height:86vh; border-radius:10px; display:block}
+.lb button{
+  position:absolute; background:rgba(12,16,20,.8); color:var(--text);
+  border:1px solid var(--line); border-radius:50%; width:44px; height:44px;
+  font-size:22px; line-height:1; cursor:pointer; transition:border-color .2s ease;
+}
+.lb button:hover{border-color:var(--w532)}
+.lb-prev{left:max(16px,3vw); top:50%; transform:translateY(-50%)}
+.lb-next{right:max(16px,3vw); top:50%; transform:translateY(-50%)}
+.lb-close{top:22px; right:max(16px,3vw)}
