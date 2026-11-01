@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="css/hobbies.css">
 <link rel="stylesheet" href="css/reveal.css">
 <link rel="stylesheet" href="css/game.css">
+<link rel="stylesheet" href="css/cv.css">
 <link rel="stylesheet" href="css/responsive.css">
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://vivek-harikumar-portfolio.netlify.app/" />
@@ -653,6 +654,19 @@
   </div>
 </dialog>
 
+<!-- CV viewer; the iframe src is set on click so nothing from Drive loads up front -->
+<dialog id="cvReel" class="cv-reel" aria-label="CV">
+  <div class="cv-panel"><iframe title="CV"></iframe></div>
+  <span class="cv-ripples" aria-hidden="true"><i></i><i></i><i></i></span>
+  <span class="cv-orb" aria-hidden="true"></span>
+  <span class="cv-dot b" aria-hidden="true"></span>
+  <span class="cv-dot r" aria-hidden="true"></span>
+  <div class="cv-ui">
+    <a class="cv-open" target="_blank" rel="noopener"><span class="l-en">Open / Download ↗</span><span class="l-de">Öffnen / Herunterladen ↗</span></a>
+    <button type="button" class="cv-close" aria-label="Close" autofocus>&times;</button>
+  </div>
+</dialog>
+
 <!-- classic scripts, not modules: modules are blocked over file://, and core.js
      defines the reduceMotion / REVEAL_SEL globals the rest read -->
 <script src="js/core.js"></script>
@@ -665,5 +679,6 @@
 <script src="js/game.js"></script>
 <script src="js/portrait.js"></script>
 <script src="js/gallery.js"></script>
+<script src="js/cv.js"></script>
 </body>
 </html>

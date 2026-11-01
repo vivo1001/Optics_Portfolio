@@ -1,0 +1,75 @@
+/* ---- CV reel: a blue and a red dot orbit while the CV loads, spiral into one purple orb,
+        and it drops like water: the orb splashes and the first ripple carries the CV in ---- */
+@property --amp{syntax:'<length>';inherits:false;initial-value:17px}
+@property --r{syntax:'<length>';inherits:false;initial-value:0px}
+
+.cv-reel{
+  border:0; padding:0; background:transparent; max-width:100vw; max-height:100vh;
+  width:100%; height:100%; overflow:hidden;
+}
+.cv-reel::backdrop{background:rgba(4,6,8,.92)}
+
+/* revealed through one circle that grows from the centre, timed to the first ripple */
+.cv-panel{
+  position:absolute; inset:0; background:var(--bg);
+  -webkit-mask:radial-gradient(circle,#000 var(--r),transparent calc(var(--r) + 2px));
+          mask:radial-gradient(circle,#000 var(--r),transparent calc(var(--r) + 2px));
+}
+.cv-reel.drop .cv-panel{animation:cv-reveal 1.4s cubic-bezier(.3,.45,.6,1) .15s forwards}
+.cv-reel.done .cv-panel{-webkit-mask:none; mask:none}
+@keyframes cv-reveal{to{--r:100vmax}}
+.cv-panel iframe{
+  position:absolute; top:80px; left:50%; translate:-50% 0;
+  width:min(900px, calc(100% - 32px)); height:calc(100% - 96px); border:0; border-radius:10px; background:var(--surface);
+}
+
+/* the dots: an orbit seen edge-on, a sideways swing plus a size pulse a quarter-turn out of phase.
+   On merge the swing's amplitude collapses, so they spiral into each other. */
+.cv-dot{
+  position:absolute; left:50%; top:50%; width:22px; height:22px; margin:-11px;
+  border-radius:50%; mix-blend-mode:screen; background:currentColor; box-shadow:0 0 18px currentColor;
+  animation:cv-swing .45s ease-in-out infinite alternate, cv-pulse .9s linear infinite;
+  transition:--amp .7s cubic-bezier(.55,0,.75,.2), opacity .25s .5s;
+}
+.cv-dot.b{color:#2E6BFF}   /* 450 nm blue */
+.cv-dot.r{color:var(--w633); animation-delay:-.45s, -.45s}
+@keyframes cv-swing{from{translate:var(--amp) 0}to{translate:calc(-1 * var(--amp)) 0}}
+@keyframes cv-pulse{0%,50%,100%{scale:1}25%{scale:1.22}75%{scale:.78}}
+.cv-reel.merge .cv-dot{--amp:0px; opacity:0}
+.cv-reel.drop .cv-dot, .cv-reel.done .cv-dot{display:none}
+
+/* red + blue -> the purple orb, lit like a droplet */
+.cv-orb{
+  position:absolute; left:50%; top:50%; width:44px; height:44px; margin:-22px; border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #fff 0 7%, #A57BFF 22%, var(--w405) 55%, #2A0E63);
+  box-shadow:0 0 28px 6px var(--w405), 0 0 90px 24px rgba(108,43,217,.45);
+  opacity:0; scale:.2;
+  transition:opacity .25s .45s, scale .4s cubic-bezier(.3,1.7,.5,1) .45s;
+}
+.cv-reel.merge .cv-orb, .cv-reel.drop .cv-orb{opacity:1; scale:1}
+.cv-reel.drop .cv-orb{animation:cv-splash .5s ease-in forwards}
+.cv-reel.done .cv-orb{display:none}
+@keyframes cv-splash{30%{transform:scale(1.35,.65)} 60%{transform:scale(.8,1.25)} 100%{transform:scale(0)}}
+
+/* the splash: rings travel at a near-steady speed and fade late, like water; sized with
+   width/height (not scale) so their edge stays thin */
+.cv-ripples i{
+  position:absolute; left:50%; top:50%; width:0; height:0; translate:-50% -50%; border-radius:50%;
+  border:3px solid rgba(201,168,255,.95); opacity:0;
+  box-shadow:0 0 16px var(--w405), inset 0 0 18px rgba(255,255,255,.22);
+}
+.cv-reel.drop .cv-ripples i{animation:cv-ring 1.4s cubic-bezier(.3,.45,.6,1) .15s forwards}
+.cv-reel.drop .cv-ripples i:nth-child(2){animation-delay:.4s}
+.cv-reel.drop .cv-ripples i:nth-child(3){animation-delay:.65s}
+@keyframes cv-ring{0%{width:0; height:0; opacity:1} 65%{opacity:.85} 100%{width:200vmax; height:200vmax; opacity:0}}
+
+/* controls, in the lightbox's button style */
+.cv-ui{position:absolute; top:22px; right:max(16px,3vw); display:flex; gap:10px; align-items:center}
+.cv-ui a, .cv-ui button{
+  background:rgba(12,16,20,.8); color:var(--text); border:1px solid var(--line);
+  height:44px; cursor:pointer; transition:border-color .2s ease, opacity .3s ease;
+}
+.cv-ui a{display:inline-flex; align-items:center; padding:0 16px; border-radius:22px; font-family:var(--font-mono); font-size:13px}
+.cv-ui button{width:44px; border-radius:50%; font-size:22px; line-height:1}
+.cv-ui a:hover, .cv-ui button:hover{border-color:var(--w532)}
+.cv-reel:not(.done) .cv-open{opacity:0; pointer-events:none}
